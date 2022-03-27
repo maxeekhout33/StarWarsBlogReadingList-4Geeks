@@ -30,7 +30,7 @@ export const Navbar = (item, resource) => {
 						context.store.list.map((favorite, index) => {
 							return (
 								<li className="dropdown-item" key={favorite.uid}>
-									<Link to={`${params.resource}/${favorite.uid}`}>
+									<Link to={`${favorite.resource}/${favorite.uid}`}>
 										{favorite.properties.name}
 									</Link>
 									<span

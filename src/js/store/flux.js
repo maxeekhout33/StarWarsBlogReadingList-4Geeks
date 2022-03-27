@@ -18,7 +18,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				);
 				const body = await response.json();
 				setStore({
-					[resource]: body.results,
+					[resource]: body.results.map((item)=>{
+						return {
+							...item, resource
+						}
+					}),
 				});
 			},
 			getDetails: async (resource, uid) => {
@@ -41,10 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const body = await response.json();
 				if (!response.ok) return;
 				setStore({
-					favorite: body.result,
-					list: [...store.list, body.result],
+					favorite: Object.assign({resource},body.result),
+					list: [...store.list, {...body.result, resource}],
 				});
-				console.log(store.list);
 
 
 			},
